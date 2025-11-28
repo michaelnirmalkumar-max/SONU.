@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday SONU 🎉</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid white;
+        box-shadow: 0 0 20px black;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-top: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .btn {
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: #ffcc00;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .btn:hover {
+        background: #fff000;
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 14px;
+        opacity: 0.7;
+    }
+
+    /* Confetti Animation */
+    #confetti-canvas {
+        position: fixed;
+        top:0; left:0;
+        width:100%;
+        height:100%;
+        pointer-events:none;
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="container">
+    <img src="c:\Users\welcome\Pictures\Saved Pictures\SONU.jpg" id="SONUPhoto">
+
+    <h1>🎉 Happy Birthday, <span id="SONU">SONU</span>! 🎉</h1>
+
+    <p id="message">
+        Wishing you a year filled with success, happiness, health, and endless joy.   
+        May all your dreams come true! ❤️
+    </p>
+
+    <button class="btn" onclick="startConfetti()">Click for Surprise 🎁</button>
+
+    <div class="footer">
+        Made By Michael.
+    </div>
+</div>
+
+<script>
+// ---------------- Confetti ----------------
+var canvas = document.getElementById('confetti-canvas');
+var ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var confettiPieces = [];
+
+function randomColor() {
+    var colors = ["#ff0", "#0ff", "#f0f", "#0f0", "#f00", "#00f"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createConfetti() {
+    return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        c: randomColor(),
+        s: Math.random() * 3 + 2
+    };
+}
+
+function startConfetti() {
+    for (let i = 0; i < 200; i++) {
+        confettiPieces.push(createConfetti());
+    }
+}
+
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiPieces.forEach((p, i) => {
+        p.y += p.s;
+        if (p.y > canvas.height) confettiPieces[i] = createConfetti();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+        ctx.fillStyle = p.c;
+        ctx.fill();
+    });
+    requestAnimationFrame(update);
+}
+update();
+</script>
+
+</body>
+</html>
